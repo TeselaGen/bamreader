@@ -5,12 +5,26 @@
  */
 const BAMReader = require(__dirname + "/../lib/bamreader.js");
 let n = 0;
+let seqReads = [];
 
 BAMReader.create(__dirname + "/arzedaexample.bam").on("bam", function(bam, dOffset, iOffset){
 // BAMReader.create(__dirname + "/arzedaexamplesorted.bam").on("bam", function(bam, dOffset, iOffset){
 // BAMReader.create(__dirname + "/large.bam").on("bam", function(bam, dOffset, iOffset){
-console.log('bam.seq:',bam.seq)  
-console.log('bam.cigar:',bam.cigar)  
+// console.log('bam.qname:',bam.qname)
+// console.log('bam.seq:',bam.seq)  
+// console.log('bam.pos:',bam.pos)  
+// console.log('bam.cigar:',bam.cigar)  
+
+// seqReads should be an array of objects [{name, seq, pos, cigar}, {name, seq, pos, cigar}, ...]
+let bamSeqRead = {
+  name: bam.qname,
+  seq: bam.seq,
+  pos: bam.pos,
+  cigar: bam.cigar
+}
+seqReads.push(bamSeqRead)
+return seqReads;
+
 // n++;
   // if (n !== 1) { return; }
   // console.assert(bam.qname === 'HS2000-903_160:5:1212:15649:87294');
@@ -41,6 +55,8 @@ console.log('bam.cigar:',bam.cigar)
   // // console.log(bam.pair); // pair bam object of the bam. To do this, indexing is needed.
   // return console.assert(bam.tagstr === "NM:i:0\tAS:i:87\tXS:i:80");
 }).on("end", function() {
-  console.log(n);
+  console.log(seqReads)
+
+  // console.log(n);
   // return console.assert(n === 101);
 });
