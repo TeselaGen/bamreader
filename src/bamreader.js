@@ -10,6 +10,8 @@
 const fs = require("fs");
 const inflateBGZF = require("bgzf").inflate;
 const isValidBGZF = require("bgzf").hasValidHeader;
+const fifo = require("./fifo");
+
 const INFBUF_CACHE_SIZE = 256 * 256 * 256 * 20;
 
 class BAMReader {
@@ -17,7 +19,7 @@ class BAMReader {
     if (o == null) { o = {}; }
     this.bamfile = require("path").resolve(bamfile);
     this.cache_size = o.cache_size || INFBUF_CACHE_SIZE;
-    this.infbufs = new module.exports.Fifo(this.cache_size);
+    this.infbufs = new fifo.Fifo(this.cache_size);
     this.fd = fs.openSync(this.bamfile, "r");
     this.nodic   = !!o.nodic;
     this.nocache = !!o.nocache;

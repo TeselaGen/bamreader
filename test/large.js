@@ -4,7 +4,7 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 const BAMReader = require(__dirname + "/../lib/bamreader.js");
-let n = 0;
+// let n = 0;
 let seqReads = [];
 
 BAMReader.create(__dirname + "/arzedaexample.bam").on("bam", function(bam, dOffset, iOffset){
