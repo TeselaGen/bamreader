@@ -64,6 +64,7 @@ class SAMTools {
           const bam = BAM.createFromSAM(sam, this.reader);
           result.push(this.on_bam(bam, this.env));
         }
+        
         return result;
       })();
     });
