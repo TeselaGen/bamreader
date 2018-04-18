@@ -7,7 +7,7 @@
 
   fs = require('fs');
 
-  lib = path.join(path.dirname(fs.realpathSync(__filename)), '../lib');
+  lib = path.join(path.dirname(fs.realpathSync(__filename)), '../src');
 
   BAMReader = require(lib + '/bamreader.js');
 

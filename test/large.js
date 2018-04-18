@@ -3,7 +3,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const BAMReader = require(__dirname + "/../lib/bamreader.js");
+const BAMReader = require(__dirname + "/../src/bamreader.js");
 // let n = 0;
 let seqReads = [];
 

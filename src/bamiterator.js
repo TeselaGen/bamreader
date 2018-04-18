@@ -5,11 +5,12 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
+const BAM = require("./bam").BAM;
+
 const c = 0;
 const fs = require("fs");
 const inflateBGZF = require("bgzf").inflate;
 const DEFAULT_PITCH = 16384000;
-const { BAM } = module.exports;
 const noop = function() {};
 
 class BAMIterator {

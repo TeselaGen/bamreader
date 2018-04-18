@@ -11,6 +11,9 @@ const fs = require("fs");
 const inflateBGZF = require("bgzf").inflate;
 const isValidBGZF = require("bgzf").hasValidHeader;
 const fifo = require("./fifo");
+const bamdic = require("./bamdic");
+const bamiterator = require("./bamiterator");
+const bam = require("./bam");
 
 const INFBUF_CACHE_SIZE = 256 * 256 * 256 * 20;
 
@@ -28,7 +31,7 @@ class BAMReader {
     // reads .dic file
     // if not exists, @dic is set null
     
-    this.dic = this.nodic ? null : BAMReader.BAMDic.create(this);
+    this.dic = this.nodic ? null : bamdic.BAMDic.create(this);
     if (this.dic) {
       this.tlen_mean = this.dic.header.tlen_mean;
       this.tlen_sd   = this.dic.header.tlen_sd;
@@ -56,7 +59,7 @@ class BAMReader {
   createIterator(o){
     if (o == null) { o = {}; }
     if (typeof o === "function") { o = {on_bam: o}; }
-    return module.exports.BAMIterator.create(this, o);
+    return bamiterator.BAMIterator.create(this, o);
   }
     
   //####################################
@@ -108,7 +111,7 @@ class BAMReader {
       const len = buf.length;
       // FIXME: longer bam data cannot be restored
       if (((i_offset + 4) <= len) && ((bytesize = buf.readInt32LE(0, true) + 4) <= len)) {
-        return new module.exports.BAM(buf.slice(i_offset, i_offset + bytesize));
+        return new bam.BAM(buf.slice(i_offset, i_offset + bytesize));
       }
     }
 
@@ -131,7 +134,7 @@ class BAMReader {
         continue;
       }
       const bambuf = infbuf.slice(0, bytesize);
-      const bam = new module.exports.BAM(bambuf, this);
+      const bam = new bam.BAM(bambuf, this);
       bam.i_offset = i_offset;
       bam.d_offset = d_offset;
       return bam;

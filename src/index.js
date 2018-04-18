@@ -2,7 +2,7 @@
 // module.exports = function readbam(path/to/file) { return Promise { bamreader.create(filename).on ... .end reject/resolve }}
 // bamreader.create
 
-// const BAMReader = require("../lib/bamreader");
+// const BAMReader = require("../src/bamreader");
 
 // const childProcess = require("child_process");
 const BAMReader = require("./bamreader");

@@ -8,6 +8,8 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
+const CIGAR = require('./CIGAR').CIGAR
+
 const SEQ_ARR = (function() {
   const ret = [];
   const arr = "=ACMGRSVTWYHKDBN".split("");
@@ -66,7 +68,7 @@ const defineGetters = (obj, getters)=> (() => {
   }
   return result;
 })() ;
-const { CIGAR } = module.exports;
+
 class BAM {
   static initClass() {
   

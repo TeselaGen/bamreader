@@ -5,7 +5,7 @@
  */
 const path = require('path');
 const fs   = require('fs');
-const lib  = path.join(path.dirname(fs.realpathSync(__filename)), '../lib');
+const lib  = path.join(path.dirname(fs.realpathSync(__filename)), '../src');
 const BAMReader = require(lib + '/bamreader.js');
 
 const main = function() {

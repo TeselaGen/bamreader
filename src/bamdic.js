@@ -6,17 +6,19 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 require("termcolor").define;
-const BAMReader = module.exports;
+const BAMReader = require("./bamreader");
 const cp = require("child_process");
 const fs = require("fs");
 const crypto = require("crypto");
+const fifo = require("./fifo");
+
 const LINE_SIZE = 11;
 const DIC_SIZE  = 8;
 
 //####################################
 // creates dic
 //####################################
-BAMReader.prototype.createDic = function(op, callback){
+BAMReader.createDic = function(op, callback){
   let binarize;
   if (op == null) { op = {}; }
   if (typeof op === "number") { op = {num: op}; }
@@ -308,7 +310,7 @@ BAMReader.prototype.createDic = function(op, callback){
   };
 };
 
-BAMReader.prototype.find = function(qname, d_offset_to_filter){
+BAMReader.find = function(qname, d_offset_to_filter){
   if (this.dic === null) {
     throw new Error(".dic file has not been created. reader.createDic() can make the file.");
   }
@@ -389,7 +391,7 @@ class BAMDic {
     }
     this.three_byte_idx[idx3byte+1] = total; // saving the last position
 
-    return this.bufs = new module.exports.Fifo(1024 * 1024 * 4);
+    return this.bufs = new fifo.Fifo(1024 * 1024 * 4);
   }
 
   fetch(qname, d_offset_to_filter){

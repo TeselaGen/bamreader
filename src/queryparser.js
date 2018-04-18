@@ -5,7 +5,8 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const BAMReader = module.exports;
+const BAMReader = require("./bamreader");
+
 const arrayize = function(v, empty) {
   if (Array.isArray(v)) { return v; } else if (empty && (v == null)) { return []; } else { return [v]; }
 };

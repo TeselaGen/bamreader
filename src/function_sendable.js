@@ -6,7 +6,7 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 // make functions sendable
-const BAMReader = module.exports;
+const BAMReader = require("./bamreader");
 const vm = require("vm");
 
 var makeSendable = function(o){

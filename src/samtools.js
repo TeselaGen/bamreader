@@ -6,9 +6,12 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const { BAM } = module.exports;
+
 const cp = require("child_process");
 const fs = require("fs");
+const BAM = require("./bam").BAM;
+const BAMReader = require("./bamreader");
+
 class SAMTools {
   constructor(reader, o){
     this.reader = reader;
@@ -73,8 +76,8 @@ class SAMTools {
 
 module.exports.SAMTools = SAMTools;
 
-const BAMReader = module.exports;
-BAMReader.prototype.samtools = function(o){
+
+BAMReader.samtools = function(o){
   if ((typeof o.num === "number") && (o.num >= 2)) {
     return this.fork_samtools(o);
   } else {
@@ -82,7 +85,7 @@ BAMReader.prototype.samtools = function(o){
   }
 };
 
-BAMReader.prototype.fork_samtools = function(o){
+BAMReader.fork_samtools = function(o){
   if (o == null) { o = {}; }
   if (typeof o === "function") { o = {on_bam : o}; }
   o.script = "child_samtools";
