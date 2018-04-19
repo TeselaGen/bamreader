@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 (function() {
-  var BAMReader, fs, lib, main, path, showUsage;
+  var BAMLineReader, fs, lib, main, path, showUsage;
 
   path = require('path');
 
@@ -9,7 +9,7 @@
 
   lib = path.join(path.dirname(fs.realpathSync(__filename)), '../src');
 
-  BAMReader = require(lib + '/bamreader.js');
+  BAMLineReader = require(lib + '/bamreader.js');
 
   main = function() {
     var ap, bamfile, debug, e, num, reader;
@@ -34,7 +34,7 @@
       debug = ap.opt("debug");
       if (ap.opt("c")) {
         num = ap.opt("p");
-        reader = BAMReader.create(bamfile, {
+        reader = BAMLineReader.create(bamfile, {
           nodic: true
         });
         return reader.createDic({
@@ -42,7 +42,7 @@
           debug: debug
         });
       } else {
-        return BAMReader.parse_query(ap.arg(0), ap.opt());
+        return BAMLineReader.parse_query(ap.arg(0), ap.opt());
       }
     } catch (_error) {
       e = _error;

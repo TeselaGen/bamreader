@@ -2,8 +2,8 @@
   "name": "ve-bamreader",
   "version": "0.2.3",
   "description": "object to read bams (forked from shinout/bamreader)",
-  "homepage": "http://github.com/tnrich/bamreader",
-  "author": "Thomas Rich<tnrich310@gmail.com>",
+  "homepage": "http://github.com/teselagen/bamreader",
+  "author": "Teselagen<team@teselagen.com>",
   "contributors": [
     {
       "name": "Shin Suzuki",
@@ -19,6 +19,9 @@
       "url": "http://MatthewRalston.github.io"
     }
   ],
+  "scripts": {
+    "test": "jest"
+  },
   "bin": "./bin/bamreader",
   "keywords": [
     "bam",
@@ -30,25 +33,28 @@
     "sequencer",
     "mapping"
   ],
-  "main": "lib/bamreader.js",
+  "main": "src/index.js",
   "engines": {
     "node": ">= 0.8.0"
   },
   "dependencies": {
-    "bgzf": "git+http://git@github.com/MatthewRalston/bgzf.git#master",
-    "termcolor": "^0.2.0"
+    "termcolor": "^0.2.0",
+    "ve-bgzf": "^0.0.2"
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/tnrich/bamreader"
+    "url": "http://github.com/teselagen/bamreader"
   },
   "bugs": {
-    "url": "http://github.com/tnrich/bamreader/issues"
+    "url": "http://github.com/teselagen/bamreader/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "http://github.com/tnrich/bamreader/blob/master/MIT-LICENSE"
+      "url": "http://github.com/teselagen/bamreader/blob/master/MIT-LICENSE"
     }
-  ]
+  ],
+  "devDependencies": {
+    "jest": "^22.4.3"
+  }
 }

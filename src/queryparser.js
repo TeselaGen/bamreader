@@ -5,7 +5,7 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const BAMReader = require("./bamreader");
+const BAMLineReader = require("./bamreader");
 
 const arrayize = function(v, empty) {
   if (Array.isArray(v)) { return v; } else if (empty && (v == null)) { return []; } else { return [v]; }
@@ -31,7 +31,7 @@ const parse_query = function(file, setting){
   setting.__proto__ = file_setting; // arg setting is prior to file setting
 
   try {
-    reader = BAMReader.create(setting.file);
+    reader = BAMLineReader.create(setting.file);
   } catch (error1) {
     e = error1;
     console.error(`${setting.file} : no such file.`);

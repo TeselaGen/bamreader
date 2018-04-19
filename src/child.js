@@ -3,17 +3,17 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const BAMReader = require(__dirname + "/bamreader.js");
-const { BAMIterator } = BAMReader;
+const BAMLineReader = require(__dirname + "/bamreader.js");
+const { BAMIterator } = BAMLineReader;
 const context = {
   LINE_SIZE : 11,
   crypto : require("crypto")
 };
 
 process.on("message", function(msg){
-  BAMReader.parseSendable(msg, context);
+  BAMLineReader.parseSendable(msg, context);
 
-  const reader = BAMReader.createFromObject(msg.reader);
+  const reader = BAMLineReader.createFromObject(msg.reader);
   if (!msg.env) { msg.env = msg.$ || {}; }
   const { env } = msg;
   for (let k of ["start", "end", "n"]) { env[k] = msg[k]; }

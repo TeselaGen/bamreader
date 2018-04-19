@@ -1,8 +1,8 @@
 Note: Forked from shinout bamreader (all credit goes to shinout)
 
-BAMReader
+BAMLineReader
 ==========
-BAMReader is a reader to parse .bam files.
+BAMLineReader is a reader to parse .bam files.
 Uses samtools If exists, otherwise uses a native parser.
 
 installation
@@ -13,11 +13,25 @@ $ npm install bamreader
 # 4.9.0 has worked in the past
 ```
 
+
+
+
 usage
 -------------
 ```js
-var BAMReader = require("bamreader");
-var reader = BAMReader.create("/path/to/bamfile.bam");
+var bamreader = require("bamreader");
+
+bamreader("/path/to/bamfile.bam").then((jsonResult) => {
+  //do something with the resulting json :)
+})
+```
+
+
+streaming usage (you probably don't need this)
+-------------
+```js 
+var BAMLineReader = require("bamreader").BAMLineReader;
+var reader = BAMLineReader.create("/path/to/bamfile.bam");
 reader.on("bam", function(bam) {
   // bam: object. see "bam object" section
   console.log(bam.seq, bam.qual);

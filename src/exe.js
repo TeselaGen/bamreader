@@ -6,7 +6,7 @@
 const path = require('path');
 const fs   = require('fs');
 const lib  = path.join(path.dirname(fs.realpathSync(__filename)), '../src');
-const BAMReader = require(lib + '/bamreader.js');
+const BAMLineReader = require(lib + '/bamreader.js');
 
 const main = function() {
   try {
@@ -26,10 +26,10 @@ const main = function() {
     // create index file
     if (ap.opt("c")) {
       const num = ap.opt("p");
-      const reader = BAMReader.create(bamfile, {nodic: true});
+      const reader = BAMLineReader.create(bamfile, {nodic: true});
       return reader.createDic({num, debug});
     } else {
-      return BAMReader.parse_query(ap.arg(0), ap.opt());
+      return BAMLineReader.parse_query(ap.arg(0), ap.opt());
     }
 
   } catch (e) {

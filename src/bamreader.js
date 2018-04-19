@@ -8,8 +8,8 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 const fs = require("fs");
-const inflateBGZF = require("bgzf").inflate;
-const isValidBGZF = require("bgzf").hasValidHeader;
+const inflateBGZF = require("ve-bgzf").inflate;
+const isValidBGZF = require("ve-bgzf").hasValidHeader;
 const fifo = require("./fifo");
 const bamdic = require("./bamdic");
 const bamiterator = require("./bamiterator");
@@ -17,7 +17,7 @@ const bam = require("./bam");
 
 const INFBUF_CACHE_SIZE = 256 * 256 * 256 * 20;
 
-class BAMReader {
+class BAMLineReader {
   constructor(bamfile, o){
     if (o == null) { o = {}; }
     this.bamfile = require("path").resolve(bamfile);
@@ -50,7 +50,7 @@ class BAMReader {
 
   static create(bamfile, o){
     if (o == null) { o = {}; }
-    return new BAMReader(bamfile, o);
+    return new BAMLineReader(bamfile, o);
   }
 
   //####################################
@@ -229,7 +229,7 @@ class BAMReader {
     }
 
     // stringify functions to pass to child processes
-    BAMReader.makeSendable(o);
+    BAMLineReader.makeSendable(o);
     o.reader = this.toObject();
 
     let ended_childs = 0;
@@ -283,7 +283,7 @@ class BAMReader {
       ({ file } = o);
       delete o.file;
     }
-    return BAMReader.create(file).fork(o);
+    return BAMLineReader.create(file).fork(o);
   }
 
 
@@ -352,7 +352,7 @@ class BAMReader {
   // restore from object(hash)
   //####################################
   static createFromObject(obj){
-    const reader = new BAMReader(obj.bamfile, {from_obj: true, cache_size: obj.cache_size, nodic: obj.nodic});
+    const reader = new BAMLineReader(obj.bamfile, {from_obj: true, cache_size: obj.cache_size, nodic: obj.nodic});
     for (let k of ["size", "header", "header_offset", "refs"]) {
       reader[k] = obj[k];
     }
@@ -370,4 +370,4 @@ class BAMReader {
   }
 }
 
-module.exports = BAMReader;
+module.exports = BAMLineReader;

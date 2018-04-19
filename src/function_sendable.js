@@ -6,7 +6,7 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 // make functions sendable
-const BAMReader = require("./bamreader");
+const BAMLineReader = require("./bamreader");
 const vm = require("vm");
 
 var makeSendable = function(o){
@@ -33,7 +33,7 @@ var parseSendable = function(o, scope, context){
       v = global[k];
       scope[k] = v;
     }
-    scope.BAMReader = BAMReader;
+    scope.BAMLineReader = BAMLineReader;
     scope.require = require;
     scope.fs = require("fs");
     context = vm.createContext(scope);
@@ -58,5 +58,5 @@ var parseSendable = function(o, scope, context){
   })();
 };
 
-BAMReader.makeSendable  = makeSendable;
-BAMReader.parseSendable = parseSendable;
+BAMLineReader.makeSendable  = makeSendable;
+BAMLineReader.parseSendable = parseSendable;

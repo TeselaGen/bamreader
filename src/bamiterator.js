@@ -9,7 +9,7 @@ const BAM = require("./bam").BAM;
 
 const c = 0;
 const fs = require("fs");
-const inflateBGZF = require("bgzf").inflate;
+const inflateBGZF = require("ve-bgzf").inflate;
 const DEFAULT_PITCH = 16384000;
 const noop = function() {};
 
