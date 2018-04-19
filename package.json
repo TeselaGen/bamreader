@@ -1,6 +1,6 @@
 {
   "name": "ve-bamreader",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "object to read bams (forked from shinout/bamreader)",
   "homepage": "http://github.com/teselagen/bamreader",
   "author": "Teselagen<team@teselagen.com>",
