@@ -8,7 +8,7 @@ Uses samtools If exists, otherwise uses a native parser.
 installation
 ----------------
 ```bash
-$ npm install bamreader 
+$ npm install ve-bamreader 
 # May require CC and CXX environmental variables on certain distributions pointing to `Nan` compatible GCC version. 
 # 4.9.0 has worked in the past
 ```
@@ -19,7 +19,7 @@ $ npm install bamreader
 usage
 -------------
 ```js
-var bamreader = require("bamreader");
+var bamreader = require("ve-bamreader");
 
 bamreader("/path/to/bamfile.bam").then((jsonResult) => {
   //do something with the resulting json :)
